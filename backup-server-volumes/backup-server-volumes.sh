@@ -15,7 +15,7 @@ eval $(openstack server image create -fshell --prefix backup_image_ --name ${SER
 eval $(openstack image show ${backup_image_id} -fshell -c properties)
 snapshot_list=$(echo ${properties} | grep -oP 'snapshot_id": "\K[^"]+')
 
-# Create a backup and then delete for each volume snapshot
+# Loop the volumes, creating a backup and then deleting
 number=0
 for snapshot_id in ${snapshot_list}; do
     eval $(openstack volume snapshot show ${snapshot_id} -fshell -c volume_id -c size)
