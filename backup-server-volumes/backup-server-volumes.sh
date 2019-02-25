@@ -2,6 +2,8 @@
 
 set -u
 
+SERVER_ID=$1
+
 # Obtain the instance id for the server to be backed up
 eval $(openstack server show ${SERVER_ID} -fshell --prefix instance_)
 
